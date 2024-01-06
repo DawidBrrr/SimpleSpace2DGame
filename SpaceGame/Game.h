@@ -23,7 +23,7 @@ private:
 	float AsteroidSpawnTimer;
 	float AsteroidSpawnTimerMax;
 	int maxAsteroids;
-	int AsteroidSpeed;
+	float AsteroidSpeed;
 	int BulletSpeed;
 	int points;
 

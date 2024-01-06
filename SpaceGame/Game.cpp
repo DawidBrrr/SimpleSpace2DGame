@@ -7,7 +7,7 @@ void Game::initializeVariables()
 	this->window = nullptr;
 	this->AsteroidSpawnTimerMax = 100.f;
 	this->AsteroidSpawnTimer = this->AsteroidSpawnTimerMax;
-	this->maxAsteroids = 30;
+	this->maxAsteroids = 20;
 	this->AsteroidSpeed = 3;
 	this->BulletSpeed = 10;
 	this->points = 0;
@@ -194,7 +194,7 @@ void Game::updateAsteroids()
 			//Spawn asteroid and reset the timer
 			this->spawnAsteroids();
 			this->AsteroidSpawnTimer = 0.f;
-			
+			this->AsteroidSpeed += 0.05;
 		}
 		else
 		{
@@ -231,7 +231,8 @@ void Game::updateCollisions()
 		{
 			this->Asteroids1.erase(this->Asteroids1.begin() + i);
 			this->updateGameOver();
-			this->AsteroidSpeed = 0;
+			this->AsteroidSpeed = -0.05;
+			
 		}
 	}
 	for (size_t j = 0; j < this->bullets.size(); j++)
