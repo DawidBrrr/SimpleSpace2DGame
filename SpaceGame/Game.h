@@ -11,7 +11,7 @@
 
 #include "Asteroids.h"
 #include "Player.h"
-#include "Bullets.h"
+#include "MainMenu.h"
 /*
 * Class that acts as the game engine.
 * Wrapper class.
@@ -26,6 +26,7 @@ private:
 	float AsteroidSpeed;
 	int BulletSpeed;
 	int points;
+	
 
 	sf::Font font;
 	sf::Text OverText;
@@ -36,6 +37,7 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videomode;
 	sf::Event ev;
+	//MainMenu mainmenu;
 	//Game Objects
 	Player player;
 	//Asteroids asteroid1;
@@ -77,6 +79,7 @@ public:
 	void updateGameOver();
 	void updateGui();
 	void update();
+	
 	void renderGui(sf::RenderTarget* target);
 	void renderGameOver(sf::RenderTarget* target);
 	void render();

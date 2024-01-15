@@ -1,6 +1,8 @@
 
 #include "Game.h"
 
+
+
 //Private functions
 void Game::initializeVariables()
 {
@@ -11,6 +13,7 @@ void Game::initializeVariables()
 	this->AsteroidSpeed = 3;
 	this->BulletSpeed = 10;
 	this->points = 0;
+	
 	
 
 }
@@ -266,6 +269,8 @@ void Game::updateGui()
 void Game::update()
 {
 	this->pollEvents();
+
+	
 	
 	this->player.updatePlayer(this->window);
 
