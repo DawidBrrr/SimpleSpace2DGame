@@ -14,11 +14,18 @@ void Player::initializePlayer()
 
 	this->Ship.setPosition(550.f, 700.f);
 	this->Ship.setScale(sf::Vector2f(0.05f, 0.05f));
+	//ships hitbox
+	
+	
+	this->Hitbox.setPointCount(3);
+	this->Hitbox.setRadius(15);
+	this->Hitbox.setPosition(560.f, 725.f);
+	//this->Hitbox.setFillColor(sf::Color::Red);
 	
 }
 
-//Constructor
-Player::Player()
+//Constructor : Hitbox(80.0f, 3)
+Player::Player() : Hitbox(80.0f, 3)
 {
 	this->initializePlayer();
 }
@@ -27,18 +34,20 @@ Player::~Player()
 {
 }
 
-const sf::Sprite& Player::getSprite() const
+const sf::CircleShape& Player::getSprite() const
 {
-	return this->Ship;
+	return this->Hitbox;
 }
 
 void Player::updatePlayerInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		this->Ship.move(-10.f, 0.f);
+		this->Hitbox.move(-10.f, 0.f);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		this->Ship.move(10.f, 0.f);
+		this->Hitbox.move(10.f, 0.f);
 	}
 }
 void Player::updateWindowBoundCollisions(const sf::RenderTarget* target)
@@ -69,4 +78,6 @@ void Player::updatePlayer(const sf::RenderTarget* target)
 void Player::renderPlayer(sf::RenderTarget* target)
 {
 	target->draw(this->Ship);
+	//uncomment for hitbox testing
+	//target->draw(this->Hitbox);
 }

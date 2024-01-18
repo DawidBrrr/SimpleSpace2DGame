@@ -9,9 +9,10 @@
 #include<SFML/Audio.hpp>
 #include<SFML/Network.hpp>
 
-#include "Asteroids.h"
+
 #include "Player.h"
 #include "MainMenu.h"
+#include "GameOver.h"
 /*
 * Class that acts as the game engine.
 * Wrapper class.
@@ -37,6 +38,9 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videomode;
 	sf::Event ev;
+
+	GameOver gameOverScreen(int);
+
 	//MainMenu mainmenu;
 	//Game Objects
 	Player player;

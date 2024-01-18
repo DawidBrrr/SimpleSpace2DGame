@@ -19,6 +19,8 @@ private:
 	//Player objects
 	sf::Sprite Ship;
 	sf::Texture ShipTexture;
+	sf::CircleShape Hitbox;
+	//sf::CircleShape Hitbox;
 	//functions
 	void initializePlayer();
 public:
@@ -26,7 +28,7 @@ public:
 	Player();
 	virtual ~Player();
 	//functions
-	const sf::Sprite& getSprite() const;
+	const sf::CircleShape& getSprite() const;
 	void updatePlayerInput();
 	void updateWindowBoundCollisions(const sf::RenderTarget* target);
 	void updatePlayer(const sf::RenderTarget* target);

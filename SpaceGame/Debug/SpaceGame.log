@@ -1,1 +1,10 @@
-﻿  SpaceGame.vcxproj -> C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\Debug\SpaceGame.exe
+﻿  Game.cpp
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(131,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(134,30): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(193,30): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(200,31): warning C4305: "+=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(205,39): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(210,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(237,27): warning C4305: "=": obcięcie z "double" do "float"
+sfml-window-s-d.lib(JoystickImpl.obj) : warning LNK4099: nie znaleziono pliku PDB „” z elementem „sfml-window-s-d.lib(JoystickImpl.obj)” lub w pozycji „”; obiekt zostanie skonsolidowany bez informacji debugowania
+  SpaceGame.vcxproj -> C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\Debug\SpaceGame.exe

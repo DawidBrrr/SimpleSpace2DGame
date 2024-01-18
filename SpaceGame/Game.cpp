@@ -119,7 +119,7 @@ void Game::pollEvents()
 }
 void Game::spawnBullet()
 {
-	this->bullet.setPosition(player.getSprite().getPosition().x+23, player.getSprite().getPosition().y);
+	this->bullet.setPosition(player.getSprite().getPosition().x+15, player.getSprite().getPosition().y);
 
 	//Spawn Asteroid
 	this->bullets.push_back(this->bullet);
@@ -238,6 +238,7 @@ void Game::updateCollisions()
 			
 		}
 	}
+
 	for (size_t j = 0; j < this->bullets.size(); j++)
 	{
 		for (size_t k = 0; k < this->Asteroids1.size(); k++)
@@ -247,6 +248,23 @@ void Game::updateCollisions()
 				this->Asteroids1.erase(this->Asteroids1.begin() + k);
 				points += 1;
 			}
+		}
+	}
+
+
+	if (this->AsteroidSpeed <= 0)
+	{
+
+		GameOver gameOverScreen(this->points);
+
+		//while (gameOverScreen.running(this->window) && this->window->isOpen())
+		while (this->window->isOpen())
+		{
+
+			gameOverScreen.update(this->window);
+			gameOverScreen.render(this->window);
+
+			this->window->display();
 		}
 	}
 
