@@ -36,7 +36,7 @@ int main()
 				}
 				if (event1.key.code == sf::Keyboard::Return)
 				{
-					
+
 					sf::RenderWindow Highscores(sf::VideoMode(1200, 800), "Highscores");
 					sf::RenderWindow About(sf::VideoMode(1200, 800), "About");
 
@@ -55,15 +55,16 @@ int main()
 							//Render
 							game.render();
 						}
-						
+
 						break;
-						
+
 					}
 					//Action with Highscores open
 					if (x == 1)
 					{
 						while (Highscores.isOpen())
 						{
+							mainmenu.LoadHighscoresFromFile("wyniki.txt", Highscores);
 							sf::Event event2;
 							while (Highscores.pollEvent(event2))
 							{
@@ -85,15 +86,18 @@ int main()
 							Highscores.clear();
 							About.close();
 
-							Highscores.display();
+							//Highscores.display();
 						}
 
 					}
 					//Actions with About open
 					if (x == 2)
 					{
+						mainmenu.ShowAbout(Menu);
+						About.close();
 						while (About.isOpen())
 						{
+							/*
 							sf::Event event2;
 							while (About.pollEvent(event2))
 							{
@@ -111,7 +115,7 @@ int main()
 
 								}
 							}
-							
+							*/
 							Highscores.clear();
 							About.clear();
 							About.display();
@@ -144,6 +148,7 @@ int main()
 
 
 	//End of application
+	
 	return 0;
 }
 

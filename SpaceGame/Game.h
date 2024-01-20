@@ -27,11 +27,14 @@ private:
 	float AsteroidSpeed;
 	int BulletSpeed;
 	int points;
+
+	int PlayerLives;
 	
 
 	sf::Font font;
 	sf::Text OverText;
 	sf::Text Points;
+	sf::Text Lives;
 
 	
 	//Window

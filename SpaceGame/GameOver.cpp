@@ -45,6 +45,7 @@ GameOver::GameOver(int score)
 {
     this->score = score;
     this->playAgainPressed = false;
+    this->allowInput = true;
     this->initializeFont();
     this->initializeGameOverText();
     this->initializeScoreText();
@@ -61,21 +62,19 @@ void GameOver::update(sf::RenderWindow* window)
     this->updatePlayerNameInput(window);
 
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-    {
-
-        this->saveToFile("wyniki.txt");
-    }
-
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         this->playAgainPressed = true;
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        window->close();
     }
 }
 
 void GameOver::render(sf::RenderTarget* target)
 {
+    
     target->draw(this->gameOverText);
 
     std::stringstream ss;
@@ -86,6 +85,23 @@ void GameOver::render(sf::RenderTarget* target)
 
     target->draw(this->enterNameText);
     this->renderPlayerNameInput(target);
+
+    sf::Text playAgainText;
+    playAgainText.setFont(this->font);
+    playAgainText.setFillColor(sf::Color::White);
+    playAgainText.setCharacterSize(30);
+    playAgainText.setString("Press Space to play again");
+    playAgainText.setPosition(250, 430);
+    target->draw(playAgainText);
+
+    sf::Text exitText;
+    exitText.setFont(this->font);
+    exitText.setFillColor(sf::Color::White);
+    exitText.setCharacterSize(30);
+    exitText.setString("Press Esc to exit");
+    exitText.setPosition(250, 460);
+    target->draw(exitText);
+
 }
 
 bool GameOver::isPlayAgainPressed() const
@@ -104,7 +120,7 @@ void GameOver::saveToFile(const std::string& filename)
 
     if (file.is_open())
     {
-        file << this->playerName << ": " << this->score << std::endl;
+        file << this->playerName << " " << this->score << std::endl;
         file.close();
     }
     else
@@ -115,26 +131,37 @@ void GameOver::saveToFile(const std::string& filename)
 
 void GameOver::updatePlayerNameInput(sf::RenderWindow* window)
 {
+    
     sf::Event event;
     while (window->pollEvent(event))
     {
-        if (event.type == sf::Event::TextEntered)
+        if (event.type == sf::Event::TextEntered && this->allowInput)
         {
             if (event.text.unicode < 128)
             {
                 if (event.text.unicode == 8 && !this->playerName.empty())
                 {
                     // Backspace pressed, remove last character
-                    this->playerName.pop_back();
+                    this->playerName.erase(this->playerName.size() - 1);
+                    
                 }
                 else if (event.text.unicode != 8)
                 {
                     // Add character to the player name
                     this->playerName += static_cast<char>(event.text.unicode);
                 }
-
+                if (event.text.unicode == 13)
+                {
+                    this->saveToFile("wyniki.txt");
+                    this->playerName.append(" :has been entered");
+                    this->playerNameText.setString(this->playerName);
+                    this->allowInput = false;
+                    
+                }
+                
                 // Update player name text
-                this->playerNameText.setString(this->playerName);
+                //this->playerNameText.setString(this->playerName);
+                
             }
         }
     }
@@ -142,6 +169,8 @@ void GameOver::updatePlayerNameInput(sf::RenderWindow* window)
 
 void GameOver::renderPlayerNameInput(sf::RenderTarget* target)
 {
+    
+    this->playerNameText.setString(this->playerName);
     this->playerNameText.setPosition(250, 300);
     target->draw(this->playerNameText);
 }

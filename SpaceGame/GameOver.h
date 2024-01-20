@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 class GameOver
 {
@@ -20,6 +21,7 @@ private:
     std::string playerName;
     int score;
     bool playAgainPressed;
+    bool allowInput;
 
     void initializeFont();
     void initializeGameOverText();

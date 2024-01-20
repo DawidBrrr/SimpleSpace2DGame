@@ -13,6 +13,7 @@ void Game::initializeVariables()
 	this->AsteroidSpeed = 3;
 	this->BulletSpeed = 10;
 	this->points = 0;
+	this->PlayerLives = 3;
 	
 	
 
@@ -59,6 +60,11 @@ void Game::initializeGui()
 	this->Points.setFont(this->font);
 	this->Points.setFillColor(sf::Color::White);
 	this->Points.setCharacterSize(35);
+
+	this->Lives.setFont(this->font);
+	this->Lives.setFillColor(sf::Color::White);
+	this->Lives.setCharacterSize(35);
+	this->Lives.setPosition(0,50);
 	
 }
 void Game::initializebullet()
@@ -119,7 +125,7 @@ void Game::pollEvents()
 }
 void Game::spawnBullet()
 {
-	this->bullet.setPosition(player.getSprite().getPosition().x+15, player.getSprite().getPosition().y);
+	this->bullet.setPosition(player.getSprite().getPosition().x+13, player.getSprite().getPosition().y);
 
 	//Spawn Asteroid
 	this->bullets.push_back(this->bullet);
@@ -233,9 +239,15 @@ void Game::updateCollisions()
 		if (this->player.getSprite().getGlobalBounds().intersects(this->Asteroids1[i].getGlobalBounds()))
 		{
 			this->Asteroids1.erase(this->Asteroids1.begin() + i);
-			this->updateGameOver();
-			this->AsteroidSpeed = -0.05;
+			this->PlayerLives--;
+			//this->updateGameOver();
+			//this->AsteroidSpeed = -0.05;
 			
+		}
+		if (this->PlayerLives == 0)
+		{
+			//this->updateGameOver();
+			this->AsteroidSpeed = -0.05;
 		}
 	}
 
@@ -260,10 +272,11 @@ void Game::updateCollisions()
 		//while (gameOverScreen.running(this->window) && this->window->isOpen())
 		while (this->window->isOpen())
 		{
-
+			this->window->clear();
 			gameOverScreen.update(this->window);
 			gameOverScreen.render(this->window);
 
+			
 			this->window->display();
 		}
 	}
@@ -277,10 +290,14 @@ void Game::updateGameOver()
 void Game::updateGui()
 {
 	std::stringstream ss;
+	std::stringstream ss2;
 
 	ss << "Points: " << this->points;
 
 	this->Points.setString(ss.str());
+
+	ss2 << "Lives " << this->PlayerLives;
+	this->Lives.setString(ss2.str());
 
 }
 
@@ -309,6 +326,7 @@ void Game::renderGameOver(sf::RenderTarget* target)
 void Game::renderGui(sf::RenderTarget* target)
 {
 	target->draw(this->Points);
+	target->draw(this->Lives);
 }
 
 
