@@ -57,11 +57,13 @@ void Player::updateWindowBoundCollisions(const sf::RenderTarget* target)
 	if (playerBounds.left <= 0.f)
 	{
 		this->Ship.setPosition(0.f,playerBounds.top);
+		this->Hitbox.setPosition(this->Ship.getPosition().x+10,this->Ship.getPosition().y+22);
 	}
 	//Right
 	else if (playerBounds.left + playerBounds.width >= target->getSize().x)
 	{
 		this->Ship.setPosition(target->getSize().x - playerBounds.width, playerBounds.top);
+		this->Hitbox.setPosition(this->Ship.getPosition().x+10, this->Ship.getPosition().y + 22);
 	}
 
 }

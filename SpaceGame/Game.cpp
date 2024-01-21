@@ -69,7 +69,7 @@ void Game::initializeGui()
 }
 void Game::initializebullet()
 {
-	this->bullet.setSize(sf::Vector2f(2.f, 6.f));
+	this->bullet.setSize(sf::Vector2f(3.f, 8.f));
 	this->bullet.setFillColor(sf::Color::Red);
 	
 }
