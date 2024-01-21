@@ -7,14 +7,15 @@
 void Game::initializeVariables()
 {
 	this->window = nullptr;
-	this->AsteroidSpawnTimerMax = 100.f;
+	this->AsteroidSpawnTimerMax = 200.f;
 	this->AsteroidSpawnTimer = this->AsteroidSpawnTimerMax;
-	this->maxAsteroids = 20;
-	this->AsteroidSpeed = 3;
+	this->maxAsteroids = 10;
+	//this->AsteroidSpeed = 3;
 	this->BulletSpeed = 10;
 	this->points = 0;
 	this->PlayerLives = 3;
 	
+	this->playAgain = false;
 	
 
 }
@@ -79,7 +80,7 @@ Game::Game()
 	this->initializeVariables();
 	this->initializeWindow();
 	this->initializeBackground();
-	this->initializeAsteroid1();
+	//this->initializeAsteroid1();
 	this->initializeFont();
 	this->initializeGameOverText();
 	this->initializebullet();
@@ -149,6 +150,7 @@ void Game::updateBullet()
 	}
 	
 }
+/*
 void Game::initializeAsteroid1()
 {
 
@@ -163,10 +165,10 @@ void Game::initializeAsteroid1()
 	this->Asteroid1.setScale(sf::Vector2f(0.1f, 0.1f));
 
 }
+*/
 
 
-
-void Game::spawnAsteroids()
+void Game::spawnSmallAsteroids()
 {
 	/*
 	* @return void
@@ -175,13 +177,58 @@ void Game::spawnAsteroids()
 	* -sets a random position
 	* -adds asteroids to the vector
 	*/
-	this->Asteroid1.setPosition(
+	this->smallasteroid.getSprite().setPosition(
 		static_cast<float>(rand() % static_cast<int>(1200)),
-		-80.f
+		-200.f
+	);
+	
+
+	//Spawn Asteroid
+	this->SmallAsteroidsVector.push_back(this->smallasteroid.getSprite());
+	
+
+	//Remove Asteroids at end of the screen
+}
+void Game::spawnMediumAsteroids()
+{
+	/*
+	* @return void
+	*
+	* Spawns asteroids and sets their positions,
+	* -sets a random position
+	* -adds asteroids to the vector
+	*/
+	
+	this->mediumasteroid.getSprite().setPosition(
+		static_cast<float>(rand() % static_cast<int>(1200)),
+		-200.f);
+	
+
+	//Spawn Asteroid
+	
+	this->MediumAsteroidsVector.push_back(this->mediumasteroid.getSprite());
+	
+
+	//Remove Asteroids at end of the screen
+}
+void Game::spawnLargeAsteroids()
+{
+	/*
+	* @return void
+	*
+	* Spawns asteroids and sets their positions,
+	* -sets a random position
+	* -adds asteroids to the vector
+	*/
+	
+	this->largeasteroid.getSprite().setPosition(
+		static_cast<float>(rand() % static_cast<int>(1200)),
+		-200.f
 	);
 
 	//Spawn Asteroid
-	this->Asteroids1.push_back(this->Asteroid1);
+	
+	this->LargeAsteroidsVector.push_back(this->largeasteroid.getSprite());
 
 	//Remove Asteroids at end of the screen
 }
@@ -196,14 +243,44 @@ void Game::updateAsteroids()
 	* remove asteroids at edge of the screen
 	*/
 	// updating the timer for spawning asteroids
-	if (this->Asteroids1.size() < this->maxAsteroids)
+	if (this->SmallAsteroidsVector.size() < this->maxAsteroids)
 	{
 		if (this->AsteroidSpawnTimer >= this->AsteroidSpawnTimerMax)
 		{
 			//Spawn asteroid and reset the timer
-			this->spawnAsteroids();
+			this->spawnSmallAsteroids();
 			this->AsteroidSpawnTimer = 0.f;
-			this->AsteroidSpeed += 0.05;
+			this->smallasteroid.AsteroidSpeedIncrease();
+		}
+		else
+		{
+			this->AsteroidSpawnTimer += 1;
+			this->AsteroidSpawnTimerMax -= 0.05;
+		}
+	}
+	if (this->MediumAsteroidsVector.size() < this->maxAsteroids)
+	{
+		if (this->AsteroidSpawnTimer >= this->AsteroidSpawnTimerMax)
+		{
+			//Spawn asteroid and reset the timer
+			this->spawnMediumAsteroids();
+			this->AsteroidSpawnTimer = 0.f;
+			this->mediumasteroid.AsteroidSpeedIncrease();
+		}
+		else
+		{
+			this->AsteroidSpawnTimer += 1;
+			this->AsteroidSpawnTimerMax -= 0.05;
+		}
+	}
+	if (this->LargeAsteroidsVector.size() < this->maxAsteroids-5)
+	{
+		if (this->AsteroidSpawnTimer >= this->AsteroidSpawnTimerMax)
+		{
+			//Spawn asteroid and reset the timer
+			this->spawnLargeAsteroids();
+			this->AsteroidSpawnTimer = 0.f;
+			this->largeasteroid.AsteroidSpeedIncrease();
 		}
 		else
 		{
@@ -213,32 +290,65 @@ void Game::updateAsteroids()
 	}
 
 	//Move asteroids
-	for (int i = 0; i < this->Asteroids1.size(); i++)
+	for (int i = 0; i < this->SmallAsteroidsVector.size(); i++)
 	{
 		bool deleted = false;
-		this->Asteroids1[i].move(0.f, this->AsteroidSpeed);
+		this->SmallAsteroidsVector[i].move(0.f, smallasteroid.getSpeed(2));
 		//Asteroid below screen remove it
 		//this->window->getSize().y
-		if (this->Asteroids1[i].getPosition().y > 800)
+		if (this->SmallAsteroidsVector[i].getPosition().y > 800)
 		{
 			deleted = true;
 		}
 		//Final delete
 		if (deleted) {
-			this->Asteroids1.erase(this->Asteroids1.begin() + i);
+			this->SmallAsteroidsVector.erase(this->SmallAsteroidsVector.begin() + i);
 			
 		}
 	}
+	for (int i = 0; i < this->MediumAsteroidsVector.size(); i++)
+	{
+		bool deleted = false;
+		this->MediumAsteroidsVector[i].move(0.f, mediumasteroid.getSpeed(1));
+		//Asteroid below screen remove it
+		//this->window->getSize().y
+		if (this->MediumAsteroidsVector[i].getPosition().y > 800)
+		{
+			deleted = true;
+		}
+		//Final delete
+		if (deleted) {
+			this->MediumAsteroidsVector.erase(this->MediumAsteroidsVector.begin() + i);
+
+		}
+	}
+	for (int i = 0; i < this->LargeAsteroidsVector.size(); i++)
+	{
+		bool deleted = false;
+		this->LargeAsteroidsVector[i].move(0.f, mediumasteroid.getSpeed(0.5));
+		//Asteroid below screen remove it
+		//this->window->getSize().y
+		if (this->LargeAsteroidsVector[i].getPosition().y > 800)
+		{
+			deleted = true;
+		}
+		//Final delete
+		if (deleted) {
+			this->LargeAsteroidsVector.erase(this->LargeAsteroidsVector.begin() + i);
+
+		}
+	}
+
 
 }
 //Colisions
 void Game::updateCollisions()
 {
-	for (size_t i = 0; i < this->Asteroids1.size(); i++)
+	for (size_t i = 0; i < this->SmallAsteroidsVector.size(); i++)
 	{
-		if (this->player.getSprite().getGlobalBounds().intersects(this->Asteroids1[i].getGlobalBounds()))
+		if (this->player.getSprite().getGlobalBounds().intersects(this->SmallAsteroidsVector[i].getGlobalBounds()))
 		{
-			this->Asteroids1.erase(this->Asteroids1.begin() + i);
+			this->SmallAsteroidsVector.erase(this->SmallAsteroidsVector.begin() + i);
 			this->PlayerLives--;
 			//this->updateGameOver();
 			//this->AsteroidSpeed = -0.05;
@@ -250,35 +360,93 @@ void Game::updateCollisions()
 			this->AsteroidSpeed = -0.05;
 		}
 	}
+	for (size_t i = 0; i < this->MediumAsteroidsVector.size(); i++)
+	{
+		if (this->player.getSprite().getGlobalBounds().intersects(this->MediumAsteroidsVector[i].getGlobalBounds()))
+		{
+			this->MediumAsteroidsVector.erase(this->MediumAsteroidsVector.begin() + i);
+			this->PlayerLives--;
+			//this->updateGameOver();
+			//this->AsteroidSpeed = -0.05;
 
+		}
+		if (this->PlayerLives == 0)
+		{
+			//this->updateGameOver();
+			this->AsteroidSpeed = -0.05;
+		}
+	}
+	for (size_t i = 0; i < this->LargeAsteroidsVector.size(); i++)
+	{
+		if (this->player.getSprite().getGlobalBounds().intersects(this->LargeAsteroidsVector[i].getGlobalBounds()))
+		{
+			this->LargeAsteroidsVector.erase(this->LargeAsteroidsVector.begin() + i);
+			this->PlayerLives--;
+			//this->updateGameOver();
+			//this->AsteroidSpeed = -0.05;
+
+		}
+		if (this->PlayerLives == 0)
+		{
+			//this->updateGameOver();
+			this->AsteroidSpeed = -0.05;
+		}
+	}
+	//Bullets collisions
 	for (size_t j = 0; j < this->bullets.size(); j++)
 	{
-		for (size_t k = 0; k < this->Asteroids1.size(); k++)
+		for (size_t k = 0; k < this->SmallAsteroidsVector.size(); k++)
 		{
-			if (this->bullets[j].getGlobalBounds().intersects(this->Asteroids1[k].getGlobalBounds()))
+			if (this->bullets[j].getGlobalBounds().intersects(this->SmallAsteroidsVector[k].getGlobalBounds()))
 			{
-				this->Asteroids1.erase(this->Asteroids1.begin() + k);
+				this->SmallAsteroidsVector.erase(this->SmallAsteroidsVector.begin() + k);
+				points += 1;
+			}
+		}
+	}
+	for (size_t j = 0; j < this->bullets.size(); j++)
+	{
+		for (size_t k = 0; k < this->MediumAsteroidsVector.size(); k++)
+		{
+			if (this->bullets[j].getGlobalBounds().intersects(this->MediumAsteroidsVector[k].getGlobalBounds()))
+			{
+				this->MediumAsteroidsVector.erase(this->MediumAsteroidsVector.begin() + k);
+				points += 1;
+			}
+		}
+	}
+	for (size_t j = 0; j < this->bullets.size(); j++)
+	{
+		for (size_t k = 0; k < this->LargeAsteroidsVector.size(); k++)
+		{
+			if (this->bullets[j].getGlobalBounds().intersects(this->LargeAsteroidsVector[k].getGlobalBounds()))
+			{
+				this->LargeAsteroidsVector.erase(this->LargeAsteroidsVector.begin() + k);
 				points += 1;
 			}
 		}
 	}
 
 
-	if (this->AsteroidSpeed <= 0)
+	if (this->PlayerLives == 0)
 	{
 
 		GameOver gameOverScreen(this->points);
 
 		//while (gameOverScreen.running(this->window) && this->window->isOpen())
-		while (this->window->isOpen())
+		while (this->window->isOpen() && this->playAgain == false)
 		{
 			this->window->clear();
 			gameOverScreen.update(this->window);
 			gameOverScreen.render(this->window);
+			this->playAgain = gameOverScreen.isPlayAgainPressed();
+			
 
 			
 			this->window->display();
 		}
+		this->PlayerLives += 3;
+		this->playAgain = false;
 	}
 
 }
@@ -344,10 +512,20 @@ void Game::render()
 	//Draw game objects
 	this->window->draw(this->Background);
 
-	for (auto Ast : this->Asteroids1)
+	for (auto Ast : this->SmallAsteroidsVector)
 	{
 		this->window->draw(Ast);
 		
+	}
+	for (auto Ast : this->MediumAsteroidsVector)
+	{
+		this->window->draw(Ast);
+
+	}
+	for (auto Ast : this->LargeAsteroidsVector)
+	{
+		this->window->draw(Ast);
+
 	}
 	for (auto Bul : this->bullets)
 	{

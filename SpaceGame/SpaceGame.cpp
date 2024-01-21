@@ -48,16 +48,18 @@ int main()
 						About.close();
 						Menu.close();
 						//Game
-						while (game.running())
-						{
-							//Update
-							game.update();
-							//Render
-							game.render();
-						}
+						do {
+							while (game.running())
+							{
+								//Update
+								game.update();
+								//Render
+								game.render();
+							}
 
+							
+						} while (game.playAgain);
 						break;
-
 					}
 					//Action with Highscores open
 					if (x == 1)

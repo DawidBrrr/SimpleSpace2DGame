@@ -1,12 +1,16 @@
-﻿  SpaceGame.cpp
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,52): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,52): warning C4244:         with
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,52): warning C4244:         [
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,52): warning C4244:             T=unsigned int
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,52): warning C4244:         ]
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,34): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,34): warning C4244:         with
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,34): warning C4244:         [
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,34): warning C4244:             T=unsigned int
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\SpaceGame.cpp(14,34): warning C4244:         ]
+﻿  Game.cpp
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(138,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(141,30): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(246,40): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(258,39): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(261,41): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(273,39): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(276,40): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(288,39): warning C4305: "-=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(293,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(309,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(325,20): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(360,27): warning C4305: "=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(376,27): warning C4305: "=": obcięcie z "double" do "float"
+C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(392,27): warning C4305: "=": obcięcie z "double" do "float"
   SpaceGame.vcxproj -> C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\Debug\SpaceGame.exe

@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "MainMenu.h"
 #include "GameOver.h"
+#include "Asteroids.h"
 /*
 * Class that acts as the game engine.
 * Wrapper class.
@@ -47,10 +48,15 @@ private:
 	//MainMenu mainmenu;
 	//Game Objects
 	Player player;
+	SmallAsteroids smallasteroid;
+	MediumAsteroids mediumasteroid;
+	LargeAsteroids largeasteroid;
 	//Asteroids asteroid1;
-	sf::Sprite Asteroid1;
-	sf::Texture Asteroid1Texture;
-	std::vector<sf::Sprite> Asteroids1;
+	//sf::Sprite Asteroid1;
+	//sf::Texture Asteroid1Texture;
+	std::vector<sf::Sprite> SmallAsteroidsVector;
+	std::vector<sf::Sprite> MediumAsteroidsVector;
+	std::vector<sf::Sprite> LargeAsteroidsVector;
 	//Bullets
 	sf::RectangleShape bullet;
 	std::vector<sf::RectangleShape> bullets;
@@ -62,7 +68,7 @@ private:
 	void initializeVariables();
 	void initializeWindow();
 	void initializeBackground();
-	void initializeAsteroid1();
+	//void initializeAsteroid1();
 	void initializeFont();
 	void initializeGameOverText();
 	void initializeGui();
@@ -76,11 +82,14 @@ public:
 	//Accesors
 	const bool running() const;
 	//Functions
+	bool playAgain;
 	
 	void pollEvents();
 	void spawnBullet();
 	void updateBullet();
-	void spawnAsteroids();
+	void spawnSmallAsteroids();
+	void spawnMediumAsteroids();
+	void spawnLargeAsteroids();
 	void updateAsteroids();
 	void updateCollisions();
 	void updateGameOver();

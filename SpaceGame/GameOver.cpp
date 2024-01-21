@@ -65,6 +65,7 @@ void GameOver::update(sf::RenderWindow* window)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         this->playAgainPressed = true;
+        window->clear();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
     {
