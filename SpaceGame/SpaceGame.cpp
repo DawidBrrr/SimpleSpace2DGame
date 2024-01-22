@@ -44,6 +44,7 @@ int main()
 					//Actions with Play button
 					if (x == 0)
 					{
+						game.writeReport("Player choose Play.");
 						Highscores.close();
 						About.close();
 						Menu.close();
@@ -64,6 +65,7 @@ int main()
 					//Action with Highscores open
 					if (x == 1)
 					{
+						game.writeReport("Player choose Highscores.");
 						while (Highscores.isOpen())
 						{
 							mainmenu.LoadHighscoresFromFile("wyniki.txt", Highscores);
@@ -95,6 +97,7 @@ int main()
 					//Actions with About open
 					if (x == 2)
 					{
+						game.writeReport("Player choose About.");
 						mainmenu.ShowAbout(Menu);
 						About.close();
 						while (About.isOpen())
@@ -126,6 +129,7 @@ int main()
 					//Exiting the game
 					if (x == 3)
 					{
+						game.writeReport("Player choose Exit.");
 						Menu.close();
 						break;
 					}

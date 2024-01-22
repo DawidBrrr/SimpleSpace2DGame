@@ -30,7 +30,9 @@ private:
 	int points;
 
 	int PlayerLives;
-	
+
+	std::ofstream reportFile;
+
 
 	sf::Font font;
 	sf::Text OverText;
@@ -73,6 +75,8 @@ private:
 	void initializeGameOverText();
 	void initializeGui();
 	void initializebullet();
+
+	
 	
 
 public:
@@ -83,6 +87,10 @@ public:
 	const bool running() const;
 	//Functions
 	bool playAgain;
+
+	void openReportFile();
+	void closeReportFile();
+	void writeReport(const std::string& action);
 	
 	void pollEvents();
 	void spawnBullet();

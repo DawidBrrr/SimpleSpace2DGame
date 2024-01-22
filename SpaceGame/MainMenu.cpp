@@ -107,9 +107,9 @@ void MainMenu::LoadHighscoresFromFile(const std::string& filename, sf::RenderWin
         std::string playerInfo = std::to_string(i+1) + ". " + players[i].first + ": " + std::to_string(players[i].second);
         this->highscoresText[i].setFont(font);
         this->highscoresText[i].setFillColor(sf::Color::White);
-        this->highscoresText[i].setCharacterSize(65);
+        this->highscoresText[i].setCharacterSize(60);
         this->highscoresText[i].setString(playerInfo);
-        this->highscoresText[i].setPosition(200, 100 + i * 75);
+        this->highscoresText[i].setPosition(200, 100 + i * 70);
         window.draw(this->highscoresText[i]);
 
     }

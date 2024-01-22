@@ -73,7 +73,30 @@ void Game::initializebullet()
 	this->bullet.setSize(sf::Vector2f(3.f, 8.f));
 	this->bullet.setFillColor(sf::Color::Red);
 	
+	
 }
+
+void Game::openReportFile()
+{
+	this->reportFile.open("raport.txt");
+}
+
+void Game::closeReportFile()
+{
+	if (this->reportFile.is_open())
+	{
+		this->reportFile.close();
+	}
+}
+
+void Game::writeReport(const std::string& action)
+{
+	if (this->reportFile.is_open())
+	{
+		this->reportFile << action << std::endl;
+	}
+}
+
 //Constructors / Destructors
 Game::Game()
 {
@@ -85,6 +108,8 @@ Game::Game()
 	this->initializeGameOverText();
 	this->initializebullet();
 	this->initializeGui();
+	this->openReportFile();
+	
 
 	
 
@@ -92,6 +117,7 @@ Game::Game()
 Game::~Game()
 {
 	delete this->window;
+	this->closeReportFile();
 }
 //Accesors
 const bool Game::running() const
@@ -118,6 +144,7 @@ void Game::pollEvents()
 			case sf::Event::KeyReleased:
 				if (this->ev.key.code == sf::Keyboard::Space) {
 					this->spawnBullet();
+					
 				}
 				break;
 
@@ -130,6 +157,7 @@ void Game::spawnBullet()
 
 	//Spawn Asteroid
 	this->bullets.push_back(this->bullet);
+	this->writeReport("Player shot a bullet.");
 }
 //Initializang Asteroid
 void Game::updateBullet()
@@ -255,7 +283,7 @@ void Game::updateAsteroids()
 		else
 		{
 			this->AsteroidSpawnTimer += 1;
-			this->AsteroidSpawnTimerMax -= 0.05;
+			this->AsteroidSpawnTimerMax -= 0.005;
 		}
 	}
 	if (this->MediumAsteroidsVector.size() < this->maxAsteroids)
@@ -270,7 +298,7 @@ void Game::updateAsteroids()
 		else
 		{
 			this->AsteroidSpawnTimer += 1;
-			this->AsteroidSpawnTimerMax -= 0.05;
+			this->AsteroidSpawnTimerMax -= 0.005;
 		}
 	}
 	if (this->LargeAsteroidsVector.size() < this->maxAsteroids-5)
@@ -285,7 +313,7 @@ void Game::updateAsteroids()
 		else
 		{
 			this->AsteroidSpawnTimer += 1;
-			this->AsteroidSpawnTimerMax -= 0.05;
+			this->AsteroidSpawnTimerMax -= 0.005;
 		}
 	}
 
@@ -350,6 +378,7 @@ void Game::updateCollisions()
 		{
 			this->SmallAsteroidsVector.erase(this->SmallAsteroidsVector.begin() + i);
 			this->PlayerLives--;
+			this->writeReport("Player lost a life.");
 			//this->updateGameOver();
 			//this->AsteroidSpeed = -0.05;
 			
@@ -366,6 +395,7 @@ void Game::updateCollisions()
 		{
 			this->MediumAsteroidsVector.erase(this->MediumAsteroidsVector.begin() + i);
 			this->PlayerLives--;
+			this->writeReport("Player lost a life.");
 			//this->updateGameOver();
 			//this->AsteroidSpeed = -0.05;
 
@@ -382,6 +412,7 @@ void Game::updateCollisions()
 		{
 			this->LargeAsteroidsVector.erase(this->LargeAsteroidsVector.begin() + i);
 			this->PlayerLives--;
+			this->writeReport("Player lost a life.");
 			//this->updateGameOver();
 			//this->AsteroidSpeed = -0.05;
 
@@ -399,6 +430,7 @@ void Game::updateCollisions()
 		{
 			if (this->bullets[j].getGlobalBounds().intersects(this->SmallAsteroidsVector[k].getGlobalBounds()))
 			{
+				this->writeReport("Player destroyed an small asteroid.");
 				this->SmallAsteroidsVector.erase(this->SmallAsteroidsVector.begin() + k);
 				points += 1;
 			}
@@ -410,6 +442,7 @@ void Game::updateCollisions()
 		{
 			if (this->bullets[j].getGlobalBounds().intersects(this->MediumAsteroidsVector[k].getGlobalBounds()))
 			{
+				this->writeReport("Player destroyed an medium asteroid.");
 				this->MediumAsteroidsVector.erase(this->MediumAsteroidsVector.begin() + k);
 				points += 1;
 			}
@@ -421,6 +454,7 @@ void Game::updateCollisions()
 		{
 			if (this->bullets[j].getGlobalBounds().intersects(this->LargeAsteroidsVector[k].getGlobalBounds()))
 			{
+				this->writeReport("Player destroyed an large asteroid.");
 				this->LargeAsteroidsVector.erase(this->LargeAsteroidsVector.begin() + k);
 				points += 1;
 			}
@@ -430,6 +464,7 @@ void Game::updateCollisions()
 
 	if (this->PlayerLives == 0)
 	{
+		this->writeReport("Player lost a game.");
 
 		GameOver gameOverScreen(this->points);
 
@@ -447,6 +482,12 @@ void Game::updateCollisions()
 		}
 		this->PlayerLives += 3;
 		this->playAgain = false;
+		this->points = 0;
+		this->SmallAsteroidsVector.clear();
+		this->MediumAsteroidsVector.clear();
+		this->LargeAsteroidsVector.clear();
+		this->AsteroidSpawnTimerMax = 200.f;
+		this->AsteroidSpawnTimer = this->AsteroidSpawnTimerMax;
 	}
 
 }
