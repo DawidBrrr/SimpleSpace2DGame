@@ -1,8 +1,0 @@
-﻿  Game.cpp
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(131,30): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(202,39): warning C4305: "-=": obcięcie z "double" do "float"
-C:\Users\Dawid\Documents\GitHub\SimpleSpace2DGame\SpaceGame\Game.cpp(210,37): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-  Player.cpp
-  SpaceGame.cpp
-  Generowanie kodu...
-LINK : fatal error LNK1104: nie można otworzyć pliku „sfml-graphics-s-d.lib”
